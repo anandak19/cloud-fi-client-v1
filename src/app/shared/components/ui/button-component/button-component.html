@@ -1,0 +1,11 @@
+<button
+  [disabled]="disabled"
+  [type]="type"
+  class="btn"
+  [ngClass]="['btn--' + variant, 'btn--' + size]"
+  (click)="onBtnClick()"
+>
+  @if(isLoading()){ <mat-spinner mode="indeterminate" diameter="24"></mat-spinner> }@else {
+  <ng-content></ng-content>
+  }
+</button>

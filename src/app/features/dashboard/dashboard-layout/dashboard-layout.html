@@ -1,0 +1,41 @@
+<mat-sidenav-container class="layout">
+  <!-- Sidebar -->
+  <mat-sidenav
+    #sidenav
+    [mode]="isHandset() ? 'over' : 'side'"
+    class="layout__sidebar"
+    [opened]="!isHandset()"
+  >
+    <mat-nav-list class="sidebar-nav">
+      <div class="links">
+        <a
+          mat-list-item
+          class="sidebar-nav__item"
+          routerLink="routers"
+          routerLinkActive="active"
+          >Dashboard</a
+        >
+      </div>
+      <app-button-component variant="danger" (clickEvent)="onLogout()">Logout</app-button-component>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Area -->
+  <mat-sidenav-content class="layout__content">
+    <mat-toolbar color="primary" class="layout__header">
+      <button
+        mat-icon-button
+        class="layout__menu-btn"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon class="material-icons-outlined">menu</mat-icon>
+      </button>
+
+      <span class="layout__brand">Cloud-fi</span>
+    </mat-toolbar>
+
+    <div class="layout__router-area">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

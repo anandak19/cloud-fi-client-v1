@@ -1,0 +1,16 @@
+<div class="user-routers">
+  <app-page-title-component title="Your Routers"> </app-page-title-component>
+  <app-table-listing-component
+    [columns]="columns"
+    [dataSource]="paginatedData()"
+    [editable]="false"
+    (viewClicked)="navigateSales($event)"
+  ></app-table-listing-component>
+
+  @if(routers().length > 0) {
+  <app-paginator-component
+    [dataLength]="routers().length"
+    (onPaginatorEvent)="onPageChange($event)"
+  ></app-paginator-component>
+  }
+</div>

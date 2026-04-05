@@ -1,0 +1,9 @@
+@use "index" as *;
+
+.router-sales {
+  &__vouchers {
+    h3 {
+      font-size: $font-size-lg;
+    }
+  }
+}
