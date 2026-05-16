@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,19 +21,21 @@ import { finalize } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ButtonComponent
+    ButtonComponent,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login implements OnInit {
-    loginForm!: FormGroup;
+  loginForm!: FormGroup;
   isLoading = signal<boolean>(false);
+  isSubmited = signal<boolean>(false);
   private _fb = inject(FormBuilder);
 
   private _auth = inject(AuthService);
   private _router = inject(Router);
   private _snackbar = inject(SnackbarService);
+  private _destroyRef = inject(DestroyRef);
 
   initForm() {
     this.loginForm = this._fb.group({
@@ -42,6 +45,7 @@ export class Login implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmited.set(true);
     if (this.loginForm.invalid) return;
 
     const loginFormVals = this.loginForm.value as ILoginData;
@@ -54,7 +58,10 @@ export class Login implements OnInit {
     this.isLoading.set(true);
     this._auth
       .login(loginData)
-      .pipe(finalize(() => this.isLoading.set(false)))
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        finalize(() => this.isLoading.set(false)),
+      )
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -68,6 +75,17 @@ export class Login implements OnInit {
       });
 
     console.log(this.loginForm.value);
+  }
+
+  get emailError() {
+    if (this.loginForm.get('email')?.hasError('required')) return 'Email is required';
+    else if (this.loginForm.get('email')?.hasError('email')) return 'Invalid Email format';
+    else return 'Invalid value';
+  }
+
+  get passwordError() {
+    if (this.loginForm.get('password')?.hasError('required')) return 'Password is required';
+    else return 'Invalid value';
   }
 
   ngOnInit(): void {

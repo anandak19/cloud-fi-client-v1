@@ -8,94 +8,116 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   outline: none;
-  font-weight: $font-weight-medium;
-  font-size: $font-size-sm;
-  border-radius: $border-radius-md;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-md;
+  border-radius: 12px; // slightly rounder for modern look
   padding: $spacing-2 $spacing-3;
+  position: relative;
+  overflow: hidden;
+
+  // Initial shadow for depth
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
   &:disabled {
     cursor: not-allowed;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.6;
     box-shadow: none;
+    transform: none;
   }
 
   // large
   &--large {
-    padding: $spacing-3 $spacing-4;
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-size-lg;
     @include respond('xs') {
-      padding: $spacing-2 $spacing-3;
+      padding: $spacing-2 $spacing-4;
+      font-size: $font-size-md;
     }
   }
 
   // default size style
   &--medium {
-    padding: $spacing-2 $spacing-3;
+    padding: $spacing-2 $spacing-4;
     @include respond('xs') {
-      padding: $spacing-1 $spacing-2;
+      padding: $spacing-2 $spacing-3;
     }
   }
 
   &--small {
-    padding: $spacing-1 $spacing-2;
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-size-sm;
     @include respond('xs') {
-      padding: $spacing-1;
+      padding: $spacing-1 $spacing-2;
     }
   }
 
   // default color style
   /*  Primary Button */
   &--primary {
-    background-color: $primary-color;
-    color: $black;
+    background: linear-gradient(135deg, $inputs, $primary-color-active);
+    color: $white;
+    box-shadow: 0 4px 12px rgba($inputs, 0.3);
 
     &:hover:not(:disabled) {
-      background-color: $primary-color-hover;
+      background: linear-gradient(135deg, color.adjust($inputs, $lightness: 5%), color.adjust($primary-color-active, $lightness: 5%));
+      box-shadow: 0 6px 16px rgba($inputs, 0.4);
     }
 
     &:active:not(:disabled) {
-      background-color: $primary-color-active;
+      background: linear-gradient(135deg, color.adjust($inputs, $lightness: -5%), color.adjust($primary-color-active, $lightness: -5%));
+      box-shadow: 0 2px 8px rgba($inputs, 0.3);
     }
 
     &:disabled {
-      background-color: $primary-color-active;
-      color: color.adjust($black, $lightness: 20%);
-      cursor: not-allowed;
-      pointer-events: none;
+      background: $primary-color-active;
+      color: rgba($white, 0.7);
     }
   }
+  
   /*  Secondary Button */
   &--secondary {
-    background-color: $secondary-color;
+    background-color: $background;
     color: $black;
+    border: 1px solid $background-division;
 
     &:hover:not(:disabled) {
-      background-color: $secondary-color-hover;
+      background-color: $background-hover;
+      border-color: $primary-color;
     }
 
     &:disabled,
     &.disabled {
       background-color: color.adjust($primary-color, $lightness: 45%);
       color: color.adjust($black, $lightness: 20%);
-      cursor: not-allowed;
-      pointer-events: none;
     }
   }
 
   /* Red color danger button */
   &--danger {
-    background-color: $red;
-    color: $black;
+    background: linear-gradient(135deg, $red, $red-hover);
     color: $white;
+    box-shadow: 0 4px 12px rgba($red, 0.3);
 
     &:hover:not(:disabled) {
-      background-color: $red-hover;
+      background: linear-gradient(135deg, color.adjust($red, $lightness: 5%), color.adjust($red-hover, $lightness: 5%));
+      box-shadow: 0 6px 16px rgba($red, 0.4);
     }
   }
 
   @include respond('xs') {
-    font-size: $font-size-xs;
+    font-size: $font-size-sm;
   }
 }

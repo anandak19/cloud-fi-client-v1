@@ -1,18 +1,24 @@
 <div class="login">
   <div class="login__form-wrapper">
     <mat-card class="login__card">
-      <h1 class="login__brand">Cloud - Fi</h1>
-      <h2 class="login__title">Sign In</h2>
+      <div class="login__brand">Cloud - Fi</div>
+      <h2 class="login__title">Welcome Back</h2>
 
       <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="login__input">
-          <mat-label>Email</mat-label>
+          <mat-label>Email Address</mat-label>
           <input matInput formControlName="email" type="email" />
+          @if (loginForm.get('email')?.hasError) {
+            <mat-error>{{ emailError }}</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="login__input">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" type="password" />
+          @if (loginForm.get('password')?.hasError) {
+            <mat-error>{{ passwordError }}</mat-error>
+          }
         </mat-form-field>
 
         <app-button-component
@@ -21,7 +27,7 @@
           [isLoading]="isLoading"
           [disabled]="isLoading()"
           size="large"
-          >Login</app-button-component
+          >Sign In</app-button-component
         >
       </form>
     </mat-card>
