@@ -1,0 +1,113 @@
+<div class="dashboard-home">
+  <!-- USER SECTION -->
+  <section class="dashboard-home__section">
+    <div class="dashboard-home__section-header">
+      <h2 class="dashboard-home__section-title">Profile Overview</h2>
+    </div>
+
+    <mat-card class="dashboard-home__profile-card">
+      <div class="dashboard-home__profile-avatar">
+        <mat-icon class="material-icons-outlined"> account_circle </mat-icon>
+      </div>
+
+      <div class="dashboard-home__profile-content">
+        <div class="dashboard-home__profile-item">
+          <span class="dashboard-home__label">User Name</span>
+          <span class="dashboard-home__value">
+            {{ userDetails()?.userName }}
+          </span>
+        </div>
+
+        <div class="dashboard-home__profile-item">
+          <span class="dashboard-home__label">Email</span>
+          <span class="dashboard-home__value">
+            {{ userDetails()?.email }}
+          </span>
+        </div>
+
+        <div class="dashboard-home__profile-item">
+          <span class="dashboard-home__label">User Type</span>
+          <span class="dashboard-home__badge">
+            {{ userDetails()?.userType }}
+          </span>
+        </div>
+
+        <div class="dashboard-home__profile-item">
+          <span class="dashboard-home__label">Phone</span>
+          <span class="dashboard-home__value">
+            {{ userDetails()?.phoneNumber }}
+          </span>
+        </div>
+      </div>
+    </mat-card>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="dashboard-home__section">
+    <div class="dashboard-home__section-header">
+      <h2 class="dashboard-home__section-title">Your Financial Summary</h2>
+    </div>
+
+    <div class="dashboard-home__stats-grid">
+      <!-- CARD -->
+      <mat-card class="dashboard-home__stat-card">
+        <div class="dashboard-home__stat-icon">
+          <mat-icon class="material-icons-outlined"> payments </mat-icon>
+        </div>
+
+        <div class="dashboard-home__stat-content">
+          <span class="dashboard-home__stat-label"> Total Sales </span>
+
+          <h3 class="dashboard-home__stat-value">
+            ₹{{ userDetails()?.totalSales | number: '1.0-0' }}
+          </h3>
+        </div>
+      </mat-card>
+
+      <!-- CARD -->
+      <mat-card class="dashboard-home__stat-card">
+        <div class="dashboard-home__stat-icon">
+          <mat-icon class="material-icons-outlined"> payment_arrow_down </mat-icon>
+        </div>
+
+        <div class="dashboard-home__stat-content">
+          <span class="dashboard-home__stat-label"> Cash Collected From Me </span>
+
+          <h3 class="dashboard-home__stat-value">
+            ₹{{ userDetails()?.totalCollectedCash | number: '1.0-0' }}
+          </h3>
+        </div>
+      </mat-card>
+
+      <!-- CARD -->
+      <mat-card class="dashboard-home__stat-card">
+        <div class="dashboard-home__stat-icon">
+          <mat-icon class="material-icons-outlined"> groups </mat-icon>
+        </div>
+
+        <div class="dashboard-home__stat-content">
+          <span class="dashboard-home__stat-label"> Cash Collected From Others </span>
+
+          <h3 class="dashboard-home__stat-value">
+            ₹{{ userDetails()?.userCollectedCash | number: '1.0-0' }}
+          </h3>
+        </div>
+      </mat-card>
+
+      <!-- CARD -->
+      <mat-card class="dashboard-home__stat-card dashboard-home__stat-card--highlight">
+        <div class="dashboard-home__stat-icon">
+          <mat-icon class="material-icons-outlined"> account_balance_wallet </mat-icon>
+        </div>
+
+        <div class="dashboard-home__stat-content">
+          <span class="dashboard-home__stat-label"> Balance Left </span>
+
+          <h3 class="dashboard-home__stat-value">
+            ₹{{ userDetails()?.balanceLeft | number: '1.0-0' }}
+          </h3>
+        </div>
+      </mat-card>
+    </div>
+  </section>
+</div>

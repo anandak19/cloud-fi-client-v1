@@ -1,6 +1,6 @@
 <div class="router-sales">
   <app-page-title-component title="Router Sales">
-    <app-back-button-component/>
+    <app-back-button-component />
   </app-page-title-component>
 
   <app-router-sales-card-component
@@ -8,18 +8,23 @@
   ></app-router-sales-card-component>
 
   <div class="router-sales__vouchers">
-    <h3>Voucher Sales</h3>
+    <div class="router-sales__vouchers-table-head">
+      <h3>Voucher Sales</h3>
+      <div class="filter">
+        <app-range-filter (filterApplied)="onRangeFilterChange($event)" (filterReset)="onRangeFilterReset()"></app-range-filter>
+      </div>
+    </div>
     <app-table-listing-component
       [columns]="couponColumns"
       [dataSource]="paginatedData"
       [actions]="false"
     ></app-table-listing-component>
 
-    @if (coupons.length > 0) {
-    <app-paginator-component
-      [dataLength]="coupons.length"
-      (onPaginatorEvent)="onPageChange($event)"
-    ></app-paginator-component>
+    @if (couponsDataSource().length > 0) {
+      <app-paginator-component
+        [dataLength]="couponsDataSource().length"
+        (onPaginatorEvent)="onPageChange($event)"
+      ></app-paginator-component>
     }
   </div>
 </div>

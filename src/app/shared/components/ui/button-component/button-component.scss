@@ -107,13 +107,14 @@
 
   /* Red color danger button */
   &--danger {
-    background: linear-gradient(135deg, $red, $red-hover);
-    color: $white;
+    border: 1px solid linear-gradient(135deg, $red, $red-hover);
+    color: $red;
     box-shadow: 0 4px 12px rgba($red, 0.3);
 
     &:hover:not(:disabled) {
       background: linear-gradient(135deg, color.adjust($red, $lightness: 5%), color.adjust($red-hover, $lightness: 5%));
       box-shadow: 0 6px 16px rgba($red, 0.4);
+      color: $white;
     }
   }
 

@@ -1,31 +1,44 @@
 <div class="summary">
-  <!-- Hotspot Card -->
+
   <mat-card class="summary__card">
-    @if(routerCashData()){
-    <h2 class="summary__title">Hotspot: {{ routerCashData()?.hotspot }}</h2>
 
-    <div class="summary__item">
-      <span class="summary__label">Total Sales</span>
-      <span class="summary__value"
-        >₹{{ routerCashData()?.totalSalesByUserInRouter }}</span
-      >
+    @if(routerCashData()) {
+
+    <div class="summary__header">
+      <h2 class="summary__title">
+        Hotspot: {{ routerCashData()?.hotspot }}
+      </h2>
     </div>
 
-    <div class="summary__item">
-      <span class="summary__label">Cash Collected</span>
-      <span class="summary__value"
-        >₹{{ routerCashData()?.totalCollectedCash }}</span
-      >
+    <div class="summary__kpis">
+
+      <div class="summary__kpi">
+        <span class="summary__label">Total Sales</span>
+        <span class="summary__value">
+          ₹{{ routerCashData()?.totalSalesByUserInRouter }}
+        </span>
+      </div>
+
+      <div class="summary__kpi">
+        <span class="summary__label">Cash Collected</span>
+        <span class="summary__value">
+          ₹{{ routerCashData()?.totalCollectedCash }}
+        </span>
+      </div>
+
+      <div class="summary__kpi summary__kpi--highlight">
+        <span class="summary__label">Balance</span>
+        <span class="summary__value">
+          ₹{{ routerCashData()?.balanceLeftInRouter }}
+        </span>
+      </div>
+
     </div>
 
-    <div class="summary__item summary__item--highlight">
-      <span class="summary__label">Balance</span>
-      <span class="summary__value"
-        >₹{{ routerCashData()?.balanceLeftInRouter }}</span
-      >
-    </div>
-    }@else {
-    <p>Router data not found</p>
+    } @else {
+      <p class="summary__placeholder">Router data not found</p>
     }
+
   </mat-card>
+
 </div>

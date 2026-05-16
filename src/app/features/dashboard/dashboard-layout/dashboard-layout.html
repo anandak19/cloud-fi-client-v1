@@ -7,15 +7,44 @@
     [opened]="!isHandset()"
   >
     <mat-nav-list class="sidebar-nav">
-      <div class="links">
-        <a
-          mat-list-item
-          class="sidebar-nav__item"
-          routerLink="routers"
-          routerLinkActive="active"
-          >Dashboard</a
-        >
+      <div class="sidebar-nav__top">
+        <div class="sidebar-nav__header">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon class="material-icons-outlined">{{
+              isHandset() ? 'close' : 'keyboard_double_arrow_left'
+            }}</mat-icon>
+          </button>
+        </div>
+
+        <!-- TODO: conver to dynamic links -->
+        <div class="links">
+          <!-- dashboard link  -->
+          <a
+            mat-list-item
+            class="sidebar-nav__item"
+            routerLink="."
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="onNavLinkClick()"
+          >
+            <mat-icon matListItemIcon class="material-icons-outlined">dashboard</mat-icon>
+            <span matListItemTitle>Dashboard</span>
+          </a>
+
+          <!-- router sales link  -->
+          <a
+            mat-list-item
+            class="sidebar-nav__item"
+            routerLink="routers"
+            routerLinkActive="active"
+            (click)="onNavLinkClick()"
+          >
+            <mat-icon matListItemIcon class="material-icons-outlined">trending_up</mat-icon>
+            <span matListItemTitle>Router Sales</span>
+          </a>
+        </div>
       </div>
+
       <app-button-component variant="danger" (clickEvent)="onLogout()">Logout</app-button-component>
     </mat-nav-list>
   </mat-sidenav>
@@ -23,15 +52,11 @@
   <!-- Main Area -->
   <mat-sidenav-content class="layout__content">
     <mat-toolbar color="primary" class="layout__header">
-      <button
-        mat-icon-button
-        class="layout__menu-btn"
-        (click)="sidenav.toggle()"
-      >
+      <button mat-icon-button class="layout__menu-btn" (click)="sidenav.toggle()">
         <mat-icon class="material-icons-outlined">menu</mat-icon>
       </button>
 
-      <span class="layout__brand">Cloud-fi</span>
+      <a routerLink="." class="layout__brand"> Cloud-fi </a>
     </mat-toolbar>
 
     <div class="layout__router-area">

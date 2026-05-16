@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaginatorComponent } from '@features/dashboard/components/feature/paginator-component/paginator-component';
@@ -18,6 +19,7 @@ export class UserRouters implements OnInit {
   private _router = inject(Router);
   private _activatedRoute = inject(ActivatedRoute);
   private _routerService = inject(RoutersService);
+  private _destroyRef = inject(DestroyRef);
 
   pageSize = signal<number>(5);
   pageIndex = signal<number>(0);
@@ -286,6 +288,7 @@ export class UserRouters implements OnInit {
   }
 
   navigateSales(id: string) {
+    console.log(id)
     this._router.navigate([`${id}`], { relativeTo: this._activatedRoute });
   }
 
@@ -313,7 +316,9 @@ export class UserRouters implements OnInit {
   }
 
   getRouters() {
-    this._routerService.getUsersRouters().subscribe({
+    this._routerService.getUsersRouters()
+    .pipe(takeUntilDestroyed(this._destroyRef))
+    .subscribe({
       next: (res) => {
         this.routers.set(res);
         this.updatePaginatedData();

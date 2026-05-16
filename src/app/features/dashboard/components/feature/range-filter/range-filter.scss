@@ -1,0 +1,46 @@
+@use '@angular/material' as mat;
+@use 'index' as *;
+
+.range-filter {
+  padding: 1rem;
+
+  &__container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__field {
+    max-width: 180px;
+    flex: 1;
+    margin-bottom: 0;
+    @include mat.form-field-overrides(
+      (
+        container-vertical-padding: 0.4rem,
+        container-height: 34px,
+        container-text-line-height: 34px,
+        subscript-text-line-height: 18px,
+      )
+    );
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    &__container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__actions {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+}
