@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -34,6 +34,7 @@ export class RangeFilter {
   @Output() filterReset = new EventEmitter<void>();
 
   private _fb = inject(FormBuilder);
+  isSubmited = signal<boolean>(false)
 
   rangeForm = this._fb.group(
     {
@@ -75,12 +76,13 @@ export class RangeFilter {
   }
 
   applyFilter() {
+    this.isSubmited.set(true);
     if (this.rangeForm.invalid) return;
 
     const startDateValue = this.rangeForm.get('startDate')?.value;
     const endDateValue = this.rangeForm.get('endDate')?.value;
     if (!startDateValue || !endDateValue) return;
-
+    
     this.filterApplied.emit({
       startDate: this.toDateString(startDateValue),
       endDate: this.toDateString(endDateValue),
@@ -102,6 +104,9 @@ export class RangeFilter {
   }
 
   get startDateError(): string {
+    if (!this.isSubmited()) {
+      return '';
+    }
     const control = this.rangeForm.get('startDate');
 
     if (control?.hasError('required')) {
@@ -116,6 +121,9 @@ export class RangeFilter {
   }
 
   get endDateError(): string {
+    if (!this.isSubmited()) {
+      return '';
+    }
     const control = this.rangeForm.get('endDate');
 
     if (control?.hasError('required')) {

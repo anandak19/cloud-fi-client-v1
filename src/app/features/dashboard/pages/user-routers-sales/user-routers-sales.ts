@@ -57,6 +57,7 @@ export class UserRoutersSales {
   }
 
   onRangeFilterChange(filterData: { startDate: string; endDate: string }) {
+    console.log('dates', filterData);
     this.getVouchers({ startDate: filterData.startDate, endDate: filterData.endDate });
   }
 

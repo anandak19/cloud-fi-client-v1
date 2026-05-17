@@ -1,19 +1,16 @@
 import { Routes } from '@angular/router';
-import { UserRouters } from './pages/user-routers/user-routers';
-import { UserRoutersSales } from './pages/user-routers-sales/user-routers-sales';
-import { DashboardHome } from './pages/dashboard-home/dashboard-home';
 
 export const DashboardRoutes: Routes = [
   {
     path: '',
-    component: DashboardHome,
+    loadComponent: () => import('./pages/dashboard-home/dashboard-home').then(m => m.DashboardHome),
   },
   {
     path: 'routers',
-    component: UserRouters,
+    loadComponent: () => import('./pages/user-routers/user-routers').then(m => m.UserRouters),
   },
   {
     path: 'routers/:routerId',
-    component: UserRoutersSales,
+    loadComponent: () => import('./pages/user-routers-sales/user-routers-sales').then(m => m.UserRoutersSales),
   },
 ];

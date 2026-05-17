@@ -5,7 +5,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
     const apiUrl = environment.apiUrl;
   console.log(apiUrl);
   const newReq = req.clone({
-    url: `${apiUrl}/${req.url}`,
+    url: `${apiUrl}/api/${req.url}`,
     withCredentials: true
   });
   return next(newReq);
