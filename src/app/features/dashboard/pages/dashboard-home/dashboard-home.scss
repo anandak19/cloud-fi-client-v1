@@ -27,56 +27,6 @@
     color: #222;
   }
 
-  /* PROFILE */
-  &__profile-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 1rem;
-
-    border-radius: 18px;
-
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-  }
-
-  &__profile-avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-    min-width: 60px;
-    width: 60px;
-    height: 60px;
-
-    border-radius: 50%;
-
-    background: linear-gradient(135deg, #1976d2, #42a5f5);
-
-    color: white;
-
-    mat-icon {
-      font-size: 36px;
-      width: 36px;
-      height: 36px;
-    }
-  }
-
-  &__profile-content {
-    flex: 1;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  &__profile-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
   /* COMMON */
   &__label {
     font-size: 0.75rem;

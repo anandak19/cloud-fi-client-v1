@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IUser } from '@features/dashboard/models/user.model';
+import { IUser, IUserFinancialSummary } from '@features/dashboard/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,5 +11,9 @@ export class DashboardHomeService {
 
   getUserDetails() {
     return this._http.get<IUser>(`${this.API_ENDPOINT}/user-details`);
+  }
+
+  getUserFinancialSummary() {
+    return this._http.get<IUserFinancialSummary>(`${this.API_ENDPOINT}/financial-summary`);
   }
 }

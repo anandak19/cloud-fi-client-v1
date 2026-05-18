@@ -4,10 +4,17 @@ export interface IRouter {
   dns: string;
   userName: string;
   callerId: string;
-  _id?: string;
 }
 
-export interface IUserRouter extends IRouter {
+export interface IRouterResponse extends IRouter {
+  _id: string;
+}
+
+export interface IRouterList extends IRouter {
+  id: string;
+}
+
+export interface IUserRouter extends IRouterResponse {
   userId: string;
   hotspot: string;
   password: string;

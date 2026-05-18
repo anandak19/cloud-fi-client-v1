@@ -10,6 +10,7 @@ import { AuthService } from '@core/services/auth/auth-service';
 import { SnackbarService } from '@core/services/snackbar/snackbar-service';
 import { ButtonComponent } from '@shared/components/ui/button-component/button-component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -29,7 +30,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class DashboardLayout {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-
   isSidebarOpen = true;
   isHandset = signal<boolean>(false);
 
@@ -38,6 +38,8 @@ export class DashboardLayout {
   private breakpointObserver = inject(BreakpointObserver);
   private _router = inject(Router);
   private _destroyRef = inject(DestroyRef);
+
+  currentUser = this._auth.currentUser;
 
   constructor() {
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe((result) => {
@@ -69,4 +71,6 @@ export class DashboardLayout {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  
 }

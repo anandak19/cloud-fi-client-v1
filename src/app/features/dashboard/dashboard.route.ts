@@ -13,4 +13,8 @@ export const DashboardRoutes: Routes = [
     path: 'routers/:routerId',
     loadComponent: () => import('./pages/user-routers-sales/user-routers-sales').then(m => m.UserRoutersSales),
   },
+  {
+    path: 'cash-collections',
+    loadComponent: () => import('./pages/cash-collections/cash-collections').then(m => m.CashCollections),
+  }
 ];

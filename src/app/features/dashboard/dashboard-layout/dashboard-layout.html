@@ -42,6 +42,18 @@
             <mat-icon matListItemIcon class="material-icons-outlined">trending_up</mat-icon>
             <span matListItemTitle>Router Sales</span>
           </a>
+
+          <!-- Cash collections  -->
+           <a
+            mat-list-item
+            class="sidebar-nav__item"
+            routerLink="cash-collections"
+            routerLinkActive="active"
+            (click)="onNavLinkClick()"
+          >
+            <mat-icon matListItemIcon class="material-icons-outlined">account_balance</mat-icon>
+            <span matListItemTitle>Cash Collections</span>
+          </a>
         </div>
       </div>
 
@@ -52,11 +64,32 @@
   <!-- Main Area -->
   <mat-sidenav-content class="layout__content">
     <mat-toolbar color="primary" class="layout__header">
-      <button mat-icon-button class="layout__menu-btn" (click)="sidenav.toggle()">
-        <mat-icon class="material-icons-outlined">menu</mat-icon>
-      </button>
+      <!-- left  -->
+      <div class="left">
+        <button mat-icon-button class="layout__menu-btn" (click)="sidenav.toggle()">
+          <mat-icon class="material-icons-outlined">menu</mat-icon>
+        </button>
 
-      <a routerLink="." class="layout__brand"> Cloud-fi </a>
+        <a routerLink="." class="layout__brand"> Cloud-fi </a>
+      </div>
+
+      <!-- right  -->
+      <div class="right">
+        <!-- profile icon and name  -->
+        <div class="right__profile">
+          <div class="right__profile-avatar">
+            <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+          </div>
+          <div class="right__profile-data">
+            @if (currentUser()) {
+              <p class="right__profile-name">{{ currentUser()?.email }}</p>
+              <span class="right__profile-sub-text"> {{ currentUser()?.userName }} </span>
+            }@else {
+              <p class="right__profile-name">Guest</p>
+            }
+          </div>
+        </div>
+      </div>
     </mat-toolbar>
 
     <div class="layout__router-area">

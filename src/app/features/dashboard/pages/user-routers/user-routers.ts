@@ -3,15 +3,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaginatorComponent } from '@features/dashboard/components/feature/paginator-component/paginator-component';
-import { TableListingComponent } from '@features/dashboard/components/feature/table-listing-component/table-listing-component';
+import { RouterCard } from '@features/dashboard/components/feature/router-card/router-card';
 import { PageTitleComponent } from '@features/dashboard/components/ui/page-title-component/page-title-component';
-import { IRouter, IListUserRouter } from '@features/dashboard/models/routers.model';
+import { IRouter, IListUserRouter, IRouterList } from '@features/dashboard/models/routers.model';
 import { RoutersService } from '@features/dashboard/services/routers/routers-service';
-import { IMatColumns } from '@shared/interfaces/table.interface';
 
 @Component({
   selector: 'app-user-routers',
-  imports: [PageTitleComponent, TableListingComponent, PaginatorComponent],
+  imports: [PageTitleComponent, PaginatorComponent, RouterCard],
   templateUrl: './user-routers.html',
   styleUrl: './user-routers.scss',
 })
@@ -23,15 +22,7 @@ export class UserRouters implements OnInit {
 
   pageSize = signal<number>(5);
   pageIndex = signal<number>(0);
-  paginatedData = signal<IRouter[]>([]);
-
-  columns: IMatColumns[] = [
-    { label: 'Device Name', key: 'deviceName' },
-    { label: 'PORT', key: 'port' },
-    { label: 'DNS', key: 'dns' },
-    { label: 'User Name', key: 'userName' },
-    { label: 'Caller Id', key: 'callerId' },
-  ];
+  paginatedData = signal<IRouterList[]>([]);
 
   routers = signal<IListUserRouter[]>([]);
 
@@ -285,7 +276,7 @@ export class UserRouters implements OnInit {
 
   get length() {
     return this.routers.length;
-  }
+  } 
 
   navigateSales(id: string) {
     console.log(id)

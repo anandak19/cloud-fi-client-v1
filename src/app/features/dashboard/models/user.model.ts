@@ -9,3 +9,10 @@ export interface IUser {
   balanceLeft: number;
   userCollectedCash: number;
 }
+
+export interface ICurrentUser extends Pick<IUser, 'id' | 'email' | 'userName' | 'userType'> {}
+
+export interface IUserFinancialSummary extends Pick<
+  IUser,
+  'totalSales' | 'totalCollectedCash' | 'balanceLeft' | 'userCollectedCash'
+> {}

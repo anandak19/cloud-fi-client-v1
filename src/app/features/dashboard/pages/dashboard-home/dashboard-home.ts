@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatIconButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardHomeService } from '@features/dashboard/services/dashboard-home/dashboard-home-service';
-import { IUser } from '@features/dashboard/models/user.model';
+import { IUserFinancialSummary } from '@features/dashboard/models/user.model';
 import { DecimalPipe } from '@angular/common';
+import { SnackbarService } from '@core/services/snackbar/snackbar-service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -16,33 +16,25 @@ import { DecimalPipe } from '@angular/common';
 export class DashboardHome implements OnInit {
   private _dashboardHomeService = inject(DashboardHomeService);
   private _destroyRef = inject(DestroyRef);
+  private _snackbar = inject(SnackbarService);
 
-  // user: IUser = {
-  //   id: '1',
-  //   email: 'john@example.com',
-  //   phoneNumber: '+91 9876543210',
-  //   username: 'John Doe',
-  //   userType: 'Admin',
-  //   totalSales: 45000,
-  //   totalCollectedCash: 43500,
-  //   blanceLeft: 6500,
-  //   userCollectedCash: 25000,
-  // };
+  userFinancialSummary = signal<IUserFinancialSummary | null>(null);
 
-  userDetails = signal<IUser | null>(null);
-
-  ngOnInit() {
+  getUserFinancialSummary() {
     this._dashboardHomeService
-      .getUserDetails()
+      .getUserFinancialSummary()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (response) => {
-          console.log('User details fetched successfully:', response);
-          this.userDetails.set(response);
+          this.userFinancialSummary.set(response);
         },
-        error: (error) => {
-          console.error('Error fetching user details:', error);
+        error: () => {
+          this._snackbar.error('Error fetching financial summary');
         },
       });
+  }
+
+  ngOnInit() {
+    this.getUserFinancialSummary();
   }
 }

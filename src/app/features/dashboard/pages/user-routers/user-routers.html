@@ -1,11 +1,17 @@
 <div class="user-routers">
   <app-page-title-component title="Your Routers"> </app-page-title-component>
-  <app-table-listing-component
+  <!-- <app-table-listing-component
     [columns]="columns"
     [dataSource]="paginatedData()"
     [editable]="false"
     (viewClicked)="navigateSales($event)"
-  ></app-table-listing-component>
+  ></app-table-listing-component> -->
+
+  <div class="user-routers__router-listing">
+    @for(router of paginatedData(); track router.deviceName){
+      <app-router-card [router]="router" (viewClicked)="navigateSales($event)"></app-router-card>
+    }
+  </div>
 
   @if(routers().length > 0) {
   <app-paginator-component

@@ -1,0 +1,34 @@
+@use 'index' as *;
+
+.user-routers {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    min-height: 100%;
+  &__router-listing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    app-router-card {
+      flex: 1 1 250px;
+      max-width: 300px;
+    }
+  }
+
+  app-paginator-component{
+    margin-top: auto;
+  }
+
+  @include respond('xs') {
+    &__router-listing {
+      flex-direction: column;
+      gap: $spacing-1;
+
+      app-router-card {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

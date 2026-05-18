@@ -1,0 +1,13 @@
+@if (router) {
+  <div class="router-card" (click)="onViewClick()">
+    <div class="router-card__content">
+      <div class="router-card__icon-wrapper">
+        <mat-icon class="router-card__icon material-icons-outlined">router</mat-icon>
+      </div>
+
+      <div class="router-card__details">
+        <h3 class="router-card__title">{{ router.deviceName }}</h3>
+      </div>
+    </div>
+  </div>
+}
