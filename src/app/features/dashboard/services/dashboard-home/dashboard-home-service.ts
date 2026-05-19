@@ -16,4 +16,6 @@ export class DashboardHomeService {
   getUserFinancialSummary() {
     return this._http.get<IUserFinancialSummary>(`${this.API_ENDPOINT}/financial-summary`);
   }
+
+
 }

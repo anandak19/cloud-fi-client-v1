@@ -19,7 +19,7 @@ export class App implements OnInit {
         this._authService.setCurrentUser(response);
       },
       error: () => {
-        this._snackbar.error('Error fetching current user details');
+        // TODO: Logout user if error occurs (token expired or invalid)
       },
     });
   }

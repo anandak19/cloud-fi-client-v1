@@ -5,34 +5,78 @@
       <h2 class="dashboard-home__section-title">Overall Financial Summary</h2>
     </div>
 
-    <div class="dashboard-home__stats-grid">
-      <!-- CARD -->
-      <mat-card class="dashboard-home__stat-card">
-        <div class="dashboard-home__stat-icon">
-          <mat-icon class="material-icons-outlined"> payments </mat-icon>
+    <div class="dashboard-home__summary-grid">
+      <!-- SALES CARD -->
+      <mat-card class="dashboard-home__summary-card">
+        <div class="dashboard-home__summary-top">
+          <div class="dashboard-home__summary-icon">
+            <mat-icon class="material-icons-outlined">payments</mat-icon>
+          </div>
+
+          <div class="dashboard-home__summary-main">
+            <span class="dashboard-home__summary-label"> Total Sales </span>
+
+            <h2 class="dashboard-home__summary-amount">₹{{ totalSalesData()?.totalSalesAmount| number: '1.0-0' }}</h2>
+
+            <span class="dashboard-home__summary-count"> {{ totalSalesData()?.totalSalesCount }} Sales </span>
+          </div>
         </div>
 
-        <div class="dashboard-home__stat-content">
-          <span class="dashboard-home__stat-label"> Total Sales </span>
+        <div class="dashboard-home__summary-stats">
+          <!-- TODAY -->
+          <div class="dashboard-home__summary-stat">
+            <span class="dashboard-home__summary-stat-label">Today</span>
 
-          <h3 class="dashboard-home__stat-value">
-            ₹{{ userFinancialSummary()?.totalSales | number: '1.0-0' }}
-          </h3>
+            <h4 class="dashboard-home__summary-stat-value">₹{{ totalSalesData()?.todaySalesAmount | number: '1.0-0' }}</h4>
+
+            <span class="dashboard-home__summary-stat-count"> {{ totalSalesData()?.todaySalesCount }} Sales </span>
+          </div>
+
+          <!-- MONTH -->
+          <div class="dashboard-home__summary-stat">
+            <span class="dashboard-home__summary-stat-label">This Month</span>
+
+            <h4 class="dashboard-home__summary-stat-value">₹{{ totalSalesData()?.monthSalesAmount| number: '1.0-0' }}</h4>
+
+            <span class="dashboard-home__summary-stat-count"> {{ totalSalesData()?.monthSalesCount }} Sales </span>
+          </div>
         </div>
       </mat-card>
 
-      <!-- CARD -->
-      <mat-card class="dashboard-home__stat-card">
-        <div class="dashboard-home__stat-icon">
-          <mat-icon class="material-icons-outlined"> groups </mat-icon>
+      <!-- CASH COLLECTION CARD -->
+      <mat-card class="dashboard-home__summary-card dashboard-home__summary-card--success">
+        <div class="dashboard-home__summary-top">
+          <div class="dashboard-home__summary-icon">
+            <mat-icon class="material-icons-outlined">account_balance_wallet</mat-icon>
+          </div>
+
+          <div class="dashboard-home__summary-main">
+            <span class="dashboard-home__summary-label"> Cash Collection </span>
+
+            <h2 class="dashboard-home__summary-amount">₹{{ totalCashCollectionData()?.totalCashCollection | number: '1.0-0' }}</h2>
+
+            <span class="dashboard-home__summary-count"> {{ totalCashCollectionData()?.todayCollections }} Collections </span>
+          </div>
         </div>
 
-        <div class="dashboard-home__stat-content">
-          <span class="dashboard-home__stat-label"> Cash Collected </span>
+        <div class="dashboard-home__summary-stats">
+          <!-- TODAY -->
+          <div class="dashboard-home__summary-stat">
+            <span class="dashboard-home__summary-stat-label">Today</span>
 
-          <h3 class="dashboard-home__stat-value">
-            ₹{{ userFinancialSummary()?.userCollectedCash | number: '1.0-0' }}
-          </h3>
+            <h4 class="dashboard-home__summary-stat-value">₹{{ totalCashCollectionData()?.todayCashCollection | number: '1.0-0' }}</h4>
+
+            <span class="dashboard-home__summary-stat-count"> {{ totalCashCollectionData()?.todayCollections }} Collections </span>
+          </div>
+
+          <!-- MONTH -->
+          <div class="dashboard-home__summary-stat">
+            <span class="dashboard-home__summary-stat-label">This Month</span>
+
+            <h4 class="dashboard-home__summary-stat-value">₹{{ totalCashCollectionData()?.monthCashCollection | number: '1.0-0' }}</h4>
+
+            <span class="dashboard-home__summary-stat-count"> {{ totalCashCollectionData()?.monthCollections }} Collections </span>
+          </div>
         </div>
       </mat-card>
     </div>
@@ -45,6 +89,21 @@
     </div>
 
     <div class="dashboard-home__stats-grid">
+      <!-- CARD -->
+      <mat-card class="dashboard-home__stat-card dashboard-home__stat-card--highlight">
+        <div class="dashboard-home__stat-icon">
+          <mat-icon class="material-icons-outlined"> account_balance_wallet </mat-icon>
+        </div>
+
+        <div class="dashboard-home__stat-content">
+          <span class="dashboard-home__stat-label"> Balance Left </span>
+
+          <h3 class="dashboard-home__stat-value">
+            ₹{{ userFinancialSummary()?.balanceLeft | number: '1.0-0' }}
+          </h3>
+        </div>
+      </mat-card>
+
       <!-- CARD -->
       <mat-card class="dashboard-home__stat-card">
         <div class="dashboard-home__stat-icon">
@@ -86,21 +145,6 @@
 
           <h3 class="dashboard-home__stat-value">
             ₹{{ userFinancialSummary()?.userCollectedCash | number: '1.0-0' }}
-          </h3>
-        </div>
-      </mat-card>
-
-      <!-- CARD -->
-      <mat-card class="dashboard-home__stat-card dashboard-home__stat-card--highlight">
-        <div class="dashboard-home__stat-icon">
-          <mat-icon class="material-icons-outlined"> account_balance_wallet </mat-icon>
-        </div>
-
-        <div class="dashboard-home__stat-content">
-          <span class="dashboard-home__stat-label"> Balance Left </span>
-
-          <h3 class="dashboard-home__stat-value">
-            ₹{{ userFinancialSummary()?.balanceLeft | number: '1.0-0' }}
           </h3>
         </div>
       </mat-card>

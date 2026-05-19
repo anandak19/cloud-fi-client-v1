@@ -64,7 +64,11 @@ export class Login implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log(res);
+          this._auth.getCurrentUser().subscribe({
+            next: (response) => {
+              this._auth.setCurrentUser(response);
+            },
+          });
           this._snackbar.success('Login Success');
           this._router.navigate(['dashboard']);
         },
