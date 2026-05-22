@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ButtonComponent } from '@shared/components/ui/button-component/button-component';
@@ -6,7 +6,7 @@ import { IMatColumns } from '@shared/interfaces/table.interface';
 
 @Component({
   selector: 'app-table-listing-component',
-  imports: [MatTableModule, CommonModule, ButtonComponent],
+  imports: [MatTableModule, CommonModule, ButtonComponent, DatePipe],
   templateUrl: './table-listing-component.html',
   styleUrl: './table-listing-component.scss',
 })

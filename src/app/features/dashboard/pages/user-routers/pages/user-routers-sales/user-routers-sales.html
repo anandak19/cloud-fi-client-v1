@@ -4,25 +4,28 @@
   </app-page-title-component>
 
   <app-router-sales-card-component
-    [routerCashData]="routerCashData"
+    [routerSalesSummary]="routerSalesSummary"
   ></app-router-sales-card-component>
 
   <div class="router-sales__vouchers">
     <div class="router-sales__vouchers-table-head">
-      <h3>Voucher Sales</h3>
+      <h3>Sales</h3>
       <div class="filter">
-        <app-range-filter (filterApplied)="onRangeFilterChange($event)" (filterReset)="onRangeFilterReset()"></app-range-filter>
+        <app-range-filter
+          (filterApplied)="onRangeFilterChange($event)"
+          (filterReset)="onRangeFilterReset()"
+        ></app-range-filter>
       </div>
     </div>
     <app-table-listing-component
       [columns]="couponColumns"
-      [dataSource]="paginatedData"
+      [dataSource]="voucherHistory()"
       [actions]="false"
     ></app-table-listing-component>
 
-    @if (couponsDataSource().length > 0) {
+    @if (historyLength() > 0) {
       <app-paginator-component
-        [dataLength]="couponsDataSource().length"
+        [dataLength]="historyLength()"
         (onPaginatorEvent)="onPageChange($event)"
       ></app-paginator-component>
     }

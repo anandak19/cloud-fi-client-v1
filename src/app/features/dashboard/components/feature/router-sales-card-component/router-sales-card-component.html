@@ -1,43 +1,55 @@
-<div class="summary">
+<div class="sales-summary">
 
-  <mat-card class="summary__card">
+  <mat-card class="sales-summary__card">
 
-    @if(routerCashData()) {
+      <div class="sales-summary__grid">
 
-    <div class="summary__header">
-      <h2 class="summary__title">
-        Hotspot: {{ routerCashData()?.hotspot }}
-      </h2>
-    </div>
+        <!-- Total Sales -->
+        <div class="sales-summary__item">
+          <span class="sales-summary__label">
+            Total Sales
+          </span>
 
-    <div class="summary__kpis">
+          <span class="sales-summary__value">
+            ₹{{ routerSalesSummary()?.totalSalesAmount }}
+          </span>
 
-      <div class="summary__kpi">
-        <span class="summary__label">Total Sales</span>
-        <span class="summary__value">
-          ₹{{ routerCashData()?.totalSalesByUserInRouter }}
-        </span>
+          <span class="sales-summary__count">
+            {{ routerSalesSummary()?.totalSalesCount }} Sales
+          </span>
+        </div>
+
+        <!-- Today's Sales -->
+        <div class="sales-summary__item sales-summary__item--today">
+          <span class="sales-summary__label">
+            Today's Sales
+          </span>
+
+          <span class="sales-summary__value">
+            ₹{{ routerSalesSummary()?.todaySalesAmount }}
+          </span>
+
+          <span class="sales-summary__count">
+            {{ routerSalesSummary()?.todaySalesCount }} Sales
+          </span>
+        </div>
+
+        <!-- Monthly Sales -->
+        <div class="sales-summary__item sales-summary__item--month">
+          <span class="sales-summary__label">
+            This Month
+          </span>
+
+          <span class="sales-summary__value">
+            ₹{{ routerSalesSummary()?.monthSalesAmount }}
+          </span>
+
+          <span class="sales-summary__count">
+            {{ routerSalesSummary()?.monthSalesCount }} Sales
+          </span>
+        </div>
+
       </div>
-
-      <div class="summary__kpi">
-        <span class="summary__label">Cash Collected</span>
-        <span class="summary__value">
-          ₹{{ routerCashData()?.totalCollectedCash }}
-        </span>
-      </div>
-
-      <div class="summary__kpi summary__kpi--highlight">
-        <span class="summary__label">Balance</span>
-        <span class="summary__value">
-          ₹{{ routerCashData()?.balanceLeftInRouter }}
-        </span>
-      </div>
-
-    </div>
-
-    } @else {
-      <p class="summary__placeholder">Router data not found</p>
-    }
 
   </mat-card>
 

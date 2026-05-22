@@ -1,0 +1,20 @@
+<div class="user-routers">
+  <app-page-title-component title="Your Routers"> </app-page-title-component>
+
+  <div class="user-routers__router-listing">
+    @for (router of paginatedData(); track router.deviceName) {
+      <app-router-card
+        [router]="router"
+        (viewSalesClicked)="navigateSales($event)"
+        (viewCollectionClicked)="navigateCollections($event)"
+      ></app-router-card>
+    }
+  </div>
+
+  @if (routers().length > 0) {
+    <app-paginator-component
+      [dataLength]="routers().length"
+      (onPaginatorEvent)="onPageChange($event)"
+    ></app-paginator-component>
+  }
+</div>

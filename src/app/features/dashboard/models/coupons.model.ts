@@ -1,4 +1,3 @@
-
 export interface ICoupon {
   id: string;
   couponNumber?: string;
@@ -21,7 +20,24 @@ export interface IUserVouchersPayload {
   vouchers: ICoupon[];
 }
 
-export interface IUserVoucherSaleResponse
-  extends IDateRangeInfo,
-    IUserVouchersPayload {}
+export interface IUserVoucherSaleResponse extends IDateRangeInfo, IUserVouchersPayload {}
 
+export interface IVoucherBase {
+  id: string;
+  couponNumber: string;
+  profile: string;
+  count: number;
+  cost: number;
+  phoneNumber: string;
+}
+
+export interface IVoucherSaleHistory extends IVoucherBase {
+  soldBy: string;
+  timeStamp: string;
+}
+
+// API response
+export interface IVoucherHistoryResponse {
+  voucherHistory: IVoucherSaleHistory[];
+  total: number;
+}

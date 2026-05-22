@@ -1,5 +1,5 @@
 @if (router) {
-  <div class="router-card" (click)="onViewClick()">
+  <div class="router-card">
     <div class="router-card__content">
       <div class="router-card__icon-wrapper">
         <mat-icon class="router-card__icon material-icons-outlined">router</mat-icon>
@@ -8,6 +8,14 @@
       <div class="router-card__details">
         <h3 class="router-card__title">{{ router.deviceName }}</h3>
       </div>
+    </div>
+    <div class="router-card__actions">
+      <app-button-component variant="primary" (clickEvent)="onViewSalesClick()"
+        >Sales</app-button-component
+      >
+      <app-button-component variant="secondary" (clickEvent)="onViewCollectionClick()"
+        >Collections</app-button-component
+      >
     </div>
   </div>
 }

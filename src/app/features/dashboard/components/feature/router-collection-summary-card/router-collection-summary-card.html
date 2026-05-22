@@ -1,0 +1,66 @@
+<div class="collection-summary">
+
+  <mat-card class="collection-summary__card">
+
+    @if(collectionSummary()) {
+
+      <div class="collection-summary__grid">
+
+        <!-- Total Collection -->
+        <div class="collection-summary__item">
+          <span class="collection-summary__label">
+            Total Collection
+          </span>
+
+          <span class="collection-summary__value">
+            ₹{{ collectionSummary()?.totalCashCollection }}
+          </span>
+
+          <span class="collection-summary__count">
+            {{ collectionSummary()?.totalCollections }} Collections
+          </span>
+        </div>
+
+        <!-- Today's Collection -->
+        <div class="collection-summary__item collection-summary__item--today">
+          <span class="collection-summary__label">
+            Today's Collection
+          </span>
+
+          <span class="collection-summary__value">
+            ₹{{ collectionSummary()?.todayCashCollection }}
+          </span>
+
+          <span class="collection-summary__count">
+            {{ collectionSummary()?.todayCollections }} Collections
+          </span>
+        </div>
+
+        <!-- Monthly Collection -->
+        <div class="collection-summary__item collection-summary__item--month">
+          <span class="collection-summary__label">
+            This Month
+          </span>
+
+          <span class="collection-summary__value">
+            ₹{{ collectionSummary()?.monthCashCollection }}
+          </span>
+
+          <span class="collection-summary__count">
+            {{ collectionSummary()?.monthCollections }} Collections
+          </span>
+        </div>
+
+      </div>
+
+    } @else {
+
+      <p class="collection-summary__placeholder">
+        Collection data not found
+      </p>
+
+    }
+
+  </mat-card>
+
+</div>

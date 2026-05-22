@@ -1,4 +1,4 @@
-export interface ITotalSalesResponse {
+export interface ISalesSummery {
   totalSalesAmount: number;
   totalSalesCount: number;
   todaySalesAmount: number;

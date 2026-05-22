@@ -13,6 +13,8 @@
                 </div>
               } @else if (typeof element[item.key] === 'boolean') {
                 {{ element[item.key] ? 'Yes' : 'No' }}
+              } @else if (item.key === 'createdAt' || item.key === 'timeStamp') {
+                {{element[item.key] | date:'dd-MM-yyyy h:mm a'}}
               } @else {
                 {{ element[item.key] || '-' }}
               }

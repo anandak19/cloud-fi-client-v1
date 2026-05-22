@@ -276,11 +276,14 @@ export class UserRouters implements OnInit {
 
   get length() {
     return this.routers.length;
-  } 
+  }
 
   navigateSales(id: string) {
-    console.log(id)
-    this._router.navigate([`${id}`], { relativeTo: this._activatedRoute });
+    this._router.navigate([`${id}/sales`], { relativeTo: this._activatedRoute });
+  }
+
+  navigateCollections(id: string) {
+    this._router.navigate([`${id}/collections`], { relativeTo: this._activatedRoute });
   }
 
   onPageChange(event: PageEvent) {
@@ -307,17 +310,18 @@ export class UserRouters implements OnInit {
   }
 
   getRouters() {
-    this._routerService.getUsersRouters()
-    .pipe(takeUntilDestroyed(this._destroyRef))
-    .subscribe({
-      next: (res) => {
-        this.routers.set(res);
-        this.updatePaginatedData();
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+    this._routerService
+      .getUsersRouters()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.routers.set(res);
+          this.updatePaginatedData();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   ngOnInit(): void {

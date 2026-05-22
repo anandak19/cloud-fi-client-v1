@@ -7,10 +7,12 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/select';
+import { MY_FORMATS } from '@core/constants/date-formats';
 import { ButtonComponent } from '@shared/components/ui/button-component/button-component';
 
 @Component({
@@ -28,13 +30,17 @@ import { ButtonComponent } from '@shared/components/ui/button-component/button-c
   ],
   templateUrl: './range-filter.html',
   styleUrl: './range-filter.scss',
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class RangeFilter {
   @Output() filterApplied = new EventEmitter<{ startDate: string; endDate: string }>();
   @Output() filterReset = new EventEmitter<void>();
 
   private _fb = inject(FormBuilder);
-  isSubmited = signal<boolean>(false)
+  isSubmited = signal<boolean>(false);
 
   rangeForm = this._fb.group(
     {
@@ -82,7 +88,7 @@ export class RangeFilter {
     const startDateValue = this.rangeForm.get('startDate')?.value;
     const endDateValue = this.rangeForm.get('endDate')?.value;
     if (!startDateValue || !endDateValue) return;
-    
+
     this.filterApplied.emit({
       startDate: this.toDateString(startDateValue),
       endDate: this.toDateString(endDateValue),

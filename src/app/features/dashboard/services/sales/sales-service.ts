@@ -1,8 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IUserVoucherSaleResponse } from '@features/dashboard/models/coupons.model';
-import { ITotalSalesResponse } from '@features/dashboard/models/sales.model';
-import { IRangeFilter } from '@shared/interfaces/filter.interface';
+import {
+  IUserVoucherSaleResponse,
+  IVoucherHistoryResponse,
+} from '@features/dashboard/models/coupons.model';
+import { ISalesSummery } from '@features/dashboard/models/sales.model';
+import { IRangeFilter, ITableLisingFilter } from '@shared/interfaces/filter.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +23,18 @@ export class SalesService {
   }
 
   getTotalSalesData() {
-    return this._http.get<ITotalSalesResponse>(`${this.API_ENDPOINT}/total-amount`);
+    return this._http.get<ISalesSummery>(`${this.API_ENDPOINT}/total-amount`);
+  }
+
+  getRouterSalesSummary(routerId: string) {
+    return this._http.get<ISalesSummery>(`${this.API_ENDPOINT}/router/${routerId}/total`);
+  }
+
+  getVoucherSalesHistory(routerId: string, filter?: ITableLisingFilter) {
+    const params = filter ? new HttpParams({ fromObject: { ...filter } }) : undefined;
+    return this._http.get<IVoucherHistoryResponse>(
+      `${this.API_ENDPOINT}/router/${routerId}/sales-history`,
+      { params },
+    );
   }
 }

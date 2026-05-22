@@ -7,9 +7,10 @@ import { IUserFinancialSummary } from '@features/dashboard/models/user.model';
 import { DecimalPipe } from '@angular/common';
 import { SnackbarService } from '@core/services/snackbar/snackbar-service';
 import { ICollectionsResponse } from '@features/dashboard/models/collections.model';
-import { ITotalSalesResponse } from '@features/dashboard/models/sales.model';
-import { CashCollections } from '@features/dashboard/services/cash-collections/cash-collections';
+import { ISalesSummery } from '@features/dashboard/models/sales.model';
+import { CashCollectionsService } from '@features/dashboard/services/cash-collections/cash-collections';
 import { SalesService } from '@features/dashboard/services/sales/sales-service';
+import { AuthService } from '@core/services/auth/auth-service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -21,12 +22,15 @@ export class DashboardHome implements OnInit {
   private _dashboardHomeService = inject(DashboardHomeService);
   private _destroyRef = inject(DestroyRef);
   private _snackbar = inject(SnackbarService);
-  private _cashCollectionsService = inject(CashCollections);
+  private _cashCollectionsService = inject(CashCollectionsService);
   private _salesService = inject(SalesService);
+  private _authService = inject(AuthService);
 
   userFinancialSummary = signal<IUserFinancialSummary | null>(null);
   totalCashCollectionData = signal<ICollectionsResponse | null>(null);
-  totalSalesData = signal<ITotalSalesResponse | null>(null);
+  totalSalesData = signal<ISalesSummery | null>(null);
+
+  currentUser = this._authService.currentUser;
 
   getUserFinancialSummary() {
     this._dashboardHomeService
@@ -72,7 +76,9 @@ export class DashboardHome implements OnInit {
 
   ngOnInit() {
     this.getUserFinancialSummary();
-    this.getTotalCashCollection();
-    this.getTotalSalesData();
+    if(this.currentUser()?.userType === 'admin') {
+      this.getTotalCashCollection();
+      this.getTotalSalesData();
+    }
   }
 }
