@@ -35,7 +35,7 @@ export class UserRoutersSales {
   private _snackbar = inject(SnackbarService);
   private _destroyRef = inject(DestroyRef);
 
-  tableListingFilter = signal<ITableLisingFilter>({ page: 0, limit: 10 });
+  tableListingFilter = signal<ITableLisingFilter>({ page: 0, limit: 1 });
 
   couponColumns: IMatColumns[] = [
     { label: 'Phone Number', key: 'phoneNumber' },

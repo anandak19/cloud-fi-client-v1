@@ -16,11 +16,14 @@ export class TableListingComponent<T> {
   @Input() editable = true;
   @Input() actions = true;
 
+  @Input() pageIndex = 0;
+  @Input() pageSize = 10;
+
   @Output() viewClicked = new EventEmitter<string>();
   @Output() editClicked = new EventEmitter<string>();
 
   get displayedColumns(): string[] {
-    const cols = this.columns.map((c) => c.key);
+    const cols = ['slNo', ...this.columns.map((c) => c.key)];
 
     if (this.actions) {
       return [...cols, 'actions'];
@@ -35,10 +38,5 @@ export class TableListingComponent<T> {
 
   onEditBtnClick(id: string) {
     this.editClicked.emit(id);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataSource']) {
-    }
   }
 }

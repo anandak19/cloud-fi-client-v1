@@ -42,6 +42,18 @@
             <mat-icon matListItemIcon class="material-icons-outlined">trending_up</mat-icon>
             <span matListItemTitle>Routers</span>
           </a>
+
+          <!-- analytics link  -->
+          <a
+            mat-list-item
+            class="sidebar-nav__item"
+            routerLink="analytics"
+            routerLinkActive="active"
+            (click)="onNavLinkClick()"
+          >
+            <mat-icon matListItemIcon class="material-icons-outlined">bar_chart</mat-icon>
+            <span matListItemTitle>Analytics</span>
+          </a>
         </div>
       </div>
 

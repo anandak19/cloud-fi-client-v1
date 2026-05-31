@@ -2,6 +2,15 @@
   @if (dataSource.length > 0) {
     <div class="table-listing__wrapper">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-listing__table">
+        <!-- Serial Number Column -->
+        <ng-container matColumnDef="slNo">
+          <th mat-header-cell *matHeaderCellDef>SL No</th>
+
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{  pageIndex * pageSize + i + 1  }} 
+          </td>
+        </ng-container>
+
         @for (item of columns; track $index) {
           <ng-container [matColumnDef]="item.key">
             <th mat-header-cell *matHeaderCellDef>{{ item.label }}</th>
@@ -14,7 +23,7 @@
               } @else if (typeof element[item.key] === 'boolean') {
                 {{ element[item.key] ? 'Yes' : 'No' }}
               } @else if (item.key === 'createdAt' || item.key === 'timeStamp') {
-                {{element[item.key] | date:'dd-MM-yyyy h:mm a'}}
+                {{ element[item.key] | date: 'dd-MM-yyyy h:mm a' }}
               } @else {
                 {{ element[item.key] || '-' }}
               }

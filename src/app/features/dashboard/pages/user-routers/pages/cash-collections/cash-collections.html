@@ -8,10 +8,28 @@
       <app-router-collection-summary-card
         [collectionSummary]="collectionSummary"
       ></app-router-collection-summary-card>
-
     </div>
     <div class="collections__content-listing">
       <!-- with filter show all cash collection  -->
+      <div class="collections__content-listing-head">
+        <h2>Collections</h2>
+        <!-- add filters here -->
+      </div>
+
+      <app-table-listing-component
+        [columns]="historyColumns"
+        [actions]="false"
+        [dataSource]="collectionHistory()"
+        [pageIndex]="tableListingFilter().page || 0"
+        [pageSize]="tableListingFilter().limit || 10"
+      ></app-table-listing-component>
+
+      @if (historyLength() > 0) {
+        <app-paginator-component
+          [dataLength]="historyLength()"
+          (onPaginatorEvent)="onPageChange($event)"
+        ></app-paginator-component>
+      }
     </div>
   </div>
 </div>

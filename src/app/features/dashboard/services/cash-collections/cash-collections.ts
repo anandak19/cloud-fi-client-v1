@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ICollectionsResponse } from '../../models/collections.model';
+import { ICollectionHistoryResponse, ICollectionsResponse } from '../../models/collections.model';
+import { ITableLisingFilter } from '@shared/interfaces/filter.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,12 @@ export class CashCollectionsService {
 
   getRouterCashCollectionSummary(routerId: string) {
     return this._http.get<ICollectionsResponse>(`${this.ADMIN_API_ENDPOINT}/router/${routerId}`);
+  }
+
+  getCashCollectionHistory(routerId: string, filter?: ITableLisingFilter) {
+    const params = filter ? new HttpParams({ fromObject: { ...filter } }) : undefined;
+    return this._http.get<ICollectionHistoryResponse>(
+      `${this.ADMIN_API_ENDPOINT}/router/${routerId}/history`,
+    );
   }
 }

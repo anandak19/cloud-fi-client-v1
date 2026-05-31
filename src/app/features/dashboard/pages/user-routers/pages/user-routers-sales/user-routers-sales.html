@@ -21,6 +21,8 @@
       [columns]="couponColumns"
       [dataSource]="voucherHistory()"
       [actions]="false"
+      [pageIndex]="tableListingFilter().page || 0"
+      [pageSize]="tableListingFilter().limit || 10"
     ></app-table-listing-component>
 
     @if (historyLength() > 0) {

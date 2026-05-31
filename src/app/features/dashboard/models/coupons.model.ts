@@ -1,3 +1,5 @@
+import { IListApiResponse } from "@shared/interfaces/common-api-response.interface";
+
 export interface ICoupon {
   id: string;
   couponNumber?: string;
@@ -37,7 +39,8 @@ export interface IVoucherSaleHistory extends IVoucherBase {
 }
 
 // API response
-export interface IVoucherHistoryResponse {
+export interface IVoucherHistoryResponse extends IListApiResponse {
   voucherHistory: IVoucherSaleHistory[];
-  total: number;
 }
+
+

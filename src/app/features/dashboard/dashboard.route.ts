@@ -15,4 +15,9 @@ export const DashboardRoutes: Routes = [
     loadChildren: () =>
       import('./pages/user-routers/user-routers.route').then((m) => m.UserRoutersRoute),
   },
+  {
+    path: 'analytics',
+    loadComponent: () =>
+      import('./pages/analytics/analytics').then((m) => m.Analytics),
+  }
 ];
